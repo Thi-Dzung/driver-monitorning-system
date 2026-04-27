@@ -25,12 +25,10 @@ MODEL_POINTS = np.array([
     [28.9,  -28.9,  -24.1],   # right mouth
 ], dtype=np.float64)
 
-
-# ── Core functions ─────────────────────────────────────────────
+# ── Core functions ───────────────────────────────────────────
 def _distance(lm_a, lm_b) -> float:
     """Euclidean distance between two normalized landmarks."""
     return np.sqrt((lm_a.x - lm_b.x)**2 + (lm_a.y - lm_b.y)**2)
-
 
 def calculate_ear(landmarks, eye_indices: list) -> float:
     """
@@ -41,7 +39,6 @@ def calculate_ear(landmarks, eye_indices: list) -> float:
     p1, p2, p3, p4, p5, p6 = [landmarks[i] for i in eye_indices]
     return (_distance(p2, p6) + _distance(p3, p5)) / (2.0 * _distance(p1, p4))
 
-
 def calculate_mar(landmarks, mouth_indices: list) -> float:
     """
     Mouth Aspect Ratio — detects yawning.
@@ -50,7 +47,6 @@ def calculate_mar(landmarks, mouth_indices: list) -> float:
     """
     p1, p2, p3, p4, p5, p6 = [landmarks[i] for i in mouth_indices]
     return (_distance(p2, p6) + _distance(p3, p5)) / (2.0 * _distance(p1, p4))
-
 
 def calculate_head_pose(landmarks, image_w: int, image_h: int):
     """
@@ -75,17 +71,14 @@ def calculate_head_pose(landmarks, image_w: int, image_h: int):
         [0,            focal_length, image_h / 2],
         [0,            0,            1           ]
     ], dtype=np.float64)
-
     dist_coeffs = np.zeros((4, 1))
-
     success, rotation_vec, _ = cv2.solvePnP(
         MODEL_POINTS, image_points,
         camera_matrix, dist_coeffs,
-        flags=cv2.SOLVEPNP_ITERATIVE
+        flags= cv2.SOLVEPNP_ITERATIVE
     )
 
     rotation_mat, _ = cv2.Rodrigues(rotation_vec)
     angles, _, _, _, _, _ = cv2.RQDecomp3x3(rotation_mat)
-
     pitch, yaw, roll = angles[0], angles[1], angles[2]
     return pitch, yaw, roll
