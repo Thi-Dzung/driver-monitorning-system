@@ -235,11 +235,9 @@ def create_windows(ear_sequence: list, label: str,
 if __name__ == "__main__":
     import pandas as pd
     os.makedirs("data/processed", exist_ok=True)
-
     EAR_THRESHOLD = 0.279 
     WINDOW_SIZE   = 30
     STEP_SIZE     = 10
-
     all_rows = []
 
     print(" Sliding Window Feature Extraction \n")
