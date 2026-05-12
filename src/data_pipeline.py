@@ -70,7 +70,7 @@ def extract_features_from_video(video_path: str) -> list:
         parts = video_path.replace('.avi', '').split('-')
         label = parts[-1]
         if not cap.isOpened():
-            print(f"  ❌ Cannot open: {video_path}")
+            print(f"  Cannot open: {video_path}")
             return features
 
         fps = cap.get(cv2.CAP_PROP_FPS)
@@ -142,7 +142,7 @@ def run():
 
     os.makedirs("data/processed", exist_ok=True)
 
-    print("🚀 Starting feature extraction...")
+    print("Starting feature extraction...")
     print(f"   Source : {MIRROR_PATH}")
     print(f"   Output : {OUTPUT_CSV}")
     print(f"   Sampling: 1 frame every {SAMPLE_EVERY} frames\n")
@@ -156,7 +156,7 @@ def run():
 
             label = get_label(filename)
             if label is None:
-                print(f"  ⚠️ Skipped (unknown label): {filename}")
+                print(f" Skipped (unknown label): {filename}")
                 continue
 
             video_path    = os.path.join(root, filename)
@@ -169,7 +169,7 @@ def run():
 
             if not features:
                 failed_videos += 1
-                print(f"  ⚠️ No features extracted")
+                print(f" No features extracted")
                 continue
 
             for feat in features:
@@ -177,7 +177,7 @@ def run():
                 all_rows.append(feat)
 
             elapsed = time.time() - start
-            print(f"  ✅ {len(features)} samples | {elapsed:.1f}s")
+            print(f"  {len(features)} samples | {elapsed:.1f}s")
 
     # ── Save CSV ───────────────────────────────────────────────
     df = pd.DataFrame(all_rows)
@@ -186,7 +186,7 @@ def run():
     total_elapsed = time.time() - start_total
 
     print(f"\n{'='*45}")
-    print(f"✅ Feature extraction complete!")
+    print(f" Feature extraction complete!")
     print(f"   Total videos    : {total_videos}")
     print(f"   Failed videos   : {failed_videos}")
     print(f"   Success rate    : {(total_videos-failed_videos)/total_videos*100:.1f}%")
