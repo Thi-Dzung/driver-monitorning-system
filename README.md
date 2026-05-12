@@ -72,8 +72,6 @@ Final State: ALERT / DROWSY / YAWNING / DISTRACTED
 - **Signal**: Head pose yaw angle via `cv2.solvePnP`
 - **Method**: Rule-based threshold (|yaw| > 20°)
 
----
-
 ## Project Structure
 
 ```
