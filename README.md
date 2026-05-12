@@ -1,4 +1,4 @@
-# 🚗 Real-time Driver Monitoring System (DMS)
+# Real-time Driver Monitoring System (DMS)
 
 > AI pipeline detecting driver fatigue and distraction in real-time using facial landmarks and machine learning.
 
@@ -9,21 +9,21 @@
 
 ---
 
-## 🎯 Overview
+## Overview
 
 Real-time system detecting **3 dangerous driver states**:
 
 | State | Signal | Method |
 |---|---|---|
-| 😴 **Drowsy** | Eye closure | EAR + XGBoost |
-| 😮 **Yawning** | Mouth opening | MAR + LightGBM |
-| ⚠️ **Distracted** | Head rotation | Yaw rule-based |
+| **Drowsy** | Eye closure | EAR + XGBoost |
+| **Yawning** | Mouth opening | MAR + LightGBM |
+| **Distracted** | Head rotation | Yaw rule-based |
 
 Runs at **30fps on CPU** — no GPU required.
 
 ---
 
-## 🧠 System Architecture
+## System Architecture
 
 ```
 Webcam Frame
@@ -49,7 +49,7 @@ Final State: ALERT / DROWSY / YAWNING / DISTRACTED
 
 ---
 
-## 🔬 ML Pipeline
+## ML Pipeline
 
 ### Drowsy Detection
 - **Dataset**: Custom recorded videos (open/closed eyes)
@@ -74,7 +74,7 @@ Final State: ALERT / DROWSY / YAWNING / DISTRACTED
 
 ---
 
-## 📁 Project Structure
+## Project Structure
 
 ```
 driver-monitoring-system/
@@ -116,7 +116,7 @@ driver-monitoring-system/
 
 ---
 
-## ⚡ Quick Start
+## Quick Start
 
 ### 1. Clone & Setup
 
@@ -146,7 +146,7 @@ python src/pipeline.py
 
 ---
 
-## 🗂️ Train Your Own Models
+## Train Your Own Models
 
 ### Drowsy Model
 
@@ -175,7 +175,7 @@ python -m src.train_yawn
 
 ---
 
-## ⚙️ Configuration
+## Configuration
 
 Edit `configs/config.yaml`:
 
@@ -203,7 +203,7 @@ sliding_window:
 
 ---
 
-## 🔑 Key Technical Decisions
+## Key Technical Decisions
 
 ### Why MediaPipe over YOLO-face?
 YOLO-face provides only 5 keypoints — insufficient for EAR/MAR calculation requiring 6 points per eye. MediaPipe FaceMesh provides 478 3D landmarks running at 30fps on CPU.
@@ -219,7 +219,7 @@ XGBoost learned a single `ratio > threshold` rule for drowsy detection (clean bi
 
 ---
 
-## 📊 Model Performance
+## Model Performance
 
 | Model | Task | Recall | F1 | CV Recall |
 |---|---|---|---|---|
@@ -230,7 +230,7 @@ XGBoost learned a single `ratio > threshold` rule for drowsy detection (clean bi
 
 ---
 
-## ⚠️ Limitations & Future Work
+## Limitations & Future Work
 
 - [ ] Per-user EAR/MAR calibration at startup
 - [ ] Time-based thresholds (ms) instead of frame-based counters
@@ -242,7 +242,7 @@ XGBoost learned a single `ratio > threshold` rule for drowsy detection (clean bi
 
 ---
 
-## 🛠️ Tech Stack
+## Tech Stack
 
 | Component | Technology |
 |---|---|
@@ -256,7 +256,7 @@ XGBoost learned a single `ratio > threshold` rule for drowsy detection (clean bi
 
 ---
 
-## 📚 References
+## References
 
 - Soukupová & Čech (2016) — Real-Time Eye Blink Detection using Facial Landmarks
 - YawDD Dataset — Abtahi et al., Yawning Detection Dataset
